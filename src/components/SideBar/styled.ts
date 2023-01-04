@@ -1,8 +1,9 @@
+import { SideBarContainerProps } from './types';
 import { SIDEBAR_WIDTH } from './../../constants';
 import styled from 'styled-components';
 
-export const SideBarContainer = styled.div`
-  width: ${SIDEBAR_WIDTH}%;
+export const SideBarContainer = styled.div<SideBarContainerProps>`
+  width: ${(props) => props.width ?? SIDEBAR_WIDTH}%;
   float: left;
   box-sizing: border-box;
   background-color: #0ff;

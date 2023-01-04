@@ -1,16 +1,21 @@
 import React, { useState, useRef, useEffect, Component } from 'react';
-// import { SideBarProps } from './types';
 import { FaListUl, FaSearch } from 'react-icons/fa';
+import { SIDEBAR_WIDTH } from '../../constants';
+import { InvisibleButton } from '../../styles';
 import { SideBarContainer } from './styled';
 
 export default function SideBar() {
-  const [isTagMenuOpen, setIsTagMenuOpen] = useState<boolean>(true);
+  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(true);
+  const openSideBar = () => {
+    setIsOpenSideBar(!isOpenSideBar);
+  };
 
   return (
     <div>
-      <SideBarContainer>
-        <FaListUl />
-        <FaSearch></FaSearch>
+      <SideBarContainer width={isOpenSideBar ? SIDEBAR_WIDTH : 100 - SIDEBAR_WIDTH}>
+        <InvisibleButton onClick={openSideBar}>
+          <FaListUl />
+        </InvisibleButton>
       </SideBarContainer>
     </div>
   );
