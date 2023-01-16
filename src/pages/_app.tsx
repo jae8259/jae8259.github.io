@@ -1,5 +1,20 @@
+import { theme } from "@/styles/theme";
 import type { AppProps } from "next/app";
+import Head from "next/head";
+import { ThemeProvider } from "styled-components";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>boilerplate</title>
+      </Head>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
+  );
 }
+
+export default MyApp;
