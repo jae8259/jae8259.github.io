@@ -2,7 +2,8 @@ import { API_BASE_PATH, PATH } from "@/shared/constants";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { PostResponse } from "./types";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { PostResponse, PostSchema } from "./types";
 
 export default function Post() {
   const { query } = useRouter<"/posts/[slug]">();
@@ -10,10 +11,16 @@ export default function Post() {
   const [post, setPost] = useState<PostResponse>();
 
   const getPost = async (slug: string) => {
-    const response = await axios.get<PostResponse>(
-      API_BASE_PATH + PATH.posts + `/${slug}`
-    );
-    setPost(response.data);
+    try {
+      const response = await axios.get<PostResponse>(
+        API_BASE_PATH + PATH.posts + `/${slug}`
+      );
+      setPost(response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setPost(PostSchema.parse({}));
+      }
+    }
   };
 
   useEffect(() => {
@@ -22,5 +29,5 @@ export default function Post() {
     }
   }, [slug]);
 
-  return <div>{post?.body}</div>;
+  return <div>{post && <ReactMarkdown>{post.body}</ReactMarkdown>}</div>;
 }
