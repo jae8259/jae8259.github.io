@@ -3,10 +3,11 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { PostResponse, PostSchema } from "./types";
+import { PostResponse } from "./types";
 
 export default function Post() {
-  const { query } = useRouter<"/posts/[slug]">();
+  const router = useRouter<"/posts/[slug]">();
+  const { query } = router;
   const slug = query.slug;
   const [post, setPost] = useState<PostResponse>();
 
@@ -18,7 +19,7 @@ export default function Post() {
       setPost(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setPost(PostSchema.parse({}));
+        router.push("/posts");
       }
     }
   };
@@ -27,7 +28,7 @@ export default function Post() {
     if (slug) {
       getPost(slug);
     }
-  }, [slug]);
+  });
 
   return <div>{post && <ReactMarkdown>{post.body}</ReactMarkdown>}</div>;
 }
