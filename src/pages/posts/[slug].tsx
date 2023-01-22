@@ -1,4 +1,5 @@
-import { API_BASE_PATH, PATH } from "@/shared/constants";
+import { PATH } from "@/shared/constants";
+import { mapApiUrl } from "@/shared/mappers";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -14,7 +15,7 @@ export default function Post() {
   const getPost = async (slug: string) => {
     try {
       const response = await axios.get<PostResponse>(
-        API_BASE_PATH + PATH.posts + `/${slug}`
+        mapApiUrl(PATH.posts, slug)
       );
       setPost(response.data);
     } catch (error) {

@@ -13,6 +13,9 @@
     "deploy": "gh-pages -d out"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@next/bundle-analyzer": "^13.1.2",
     "@next/font": "13.1.2",
     "@types/node": "18.11.18",
@@ -21,6 +24,7 @@
     "axios": "^1.2.2",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.2",
+    "framer-motion": "^8.5.0",
     "next": "^13.1.2",
     "nextjs-routes": "^1.0.7",
     "react": "18.2.0",
