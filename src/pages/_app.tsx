@@ -1,21 +1,29 @@
 import { theme } from "@/styles/theme";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, GlobalStyle } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isDarkMode, setDarkMode] = useState<boolean>(true);
+  useEffect(() => {
+    console.log(isDarkMode);
+  }, [isDarkMode]);
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>boilerplate</title>
+        <title>jae8259 blog</title>
       </Head>
-      <ChakraProvider>
-        <ThemeProvider theme={theme}>
+
+      <ThemeProvider theme={theme}>
+        <ChakraProvider>
+          <GlobalStyle />
           <Component {...pageProps} />
-        </ThemeProvider>
-      </ChakraProvider>
+        </ChakraProvider>
+      </ThemeProvider>
     </>
   );
 }

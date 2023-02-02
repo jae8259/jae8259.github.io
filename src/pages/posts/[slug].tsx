@@ -1,5 +1,6 @@
 import { PATH } from "@/shared/constants";
 import { mapApiUrl } from "@/shared/mappers";
+import { DarkMode } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -31,5 +32,13 @@ export default function Post() {
     }
   });
 
-  return <div>{post && <ReactMarkdown>{post.body}</ReactMarkdown>}</div>;
+  return (
+    <div>
+      {post && (
+        <DarkMode>
+          <ReactMarkdown>{post.body}</ReactMarkdown>
+        </DarkMode>
+      )}
+    </div>
+  );
 }
