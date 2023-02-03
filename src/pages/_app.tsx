@@ -1,3 +1,4 @@
+import { Layout } from "@/components/layouts/Layout";
 import { theme } from "@/styles/theme";
 import { ChakraProvider, GlobalStyle } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
@@ -17,13 +18,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>jae8259 blog</title>
       </Head>
-
-      <ThemeProvider theme={theme}>
-        <ChakraProvider>
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </ThemeProvider>
+      <Layout>
+        <ThemeProvider theme={theme}>
+          <ChakraProvider>
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </ThemeProvider>
+      </Layout>
     </>
   );
 }
