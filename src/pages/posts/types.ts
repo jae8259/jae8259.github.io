@@ -14,4 +14,13 @@ export const PostSchema = z.object({
   tags: z.array(z.string().max(50)),
 });
 
+const PostParamsSchema = z.object({
+  slug: z.string(),
+});
+
+export type PostProps = {
+  post: PostResponse;
+};
+
+export type PostsParams = z.infer<typeof PostParamsSchema>;
 export type PostResponse = z.infer<typeof PostSchema>;

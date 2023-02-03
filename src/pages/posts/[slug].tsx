@@ -3,34 +3,30 @@ import { mapApiUrl } from "@/shared/mappers";
 import { DarkMode } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { PostResponse } from "./types";
+import { PostProps, PostResponse, PostsParams } from "./types";
 
-export default function Post() {
+export const getServerSideProps = async ({
+  params,
+}: {
+  params: PostsParams;
+}) => {
+  try {
+    const response = await axios.get<PostResponse>(
+      mapApiUrl(PATH.posts, params.slug)
+    );
+    const post = response.data;
+
+    return { props: { post } };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { redirect: { destination: PATH.posts, permanent: false } };
+    }
+  }
+};
+
+export default function Post({ post }: PostProps) {
   const router = useRouter<"/posts/[slug]">();
-  const { query } = router;
-  const slug = query.slug;
-  const [post, setPost] = useState<PostResponse>();
-
-  const getPost = async (slug: string) => {
-    try {
-      const response = await axios.get<PostResponse>(
-        mapApiUrl(PATH.posts, slug)
-      );
-      setPost(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        router.push("/posts");
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (slug) {
-      getPost(slug);
-    }
-  });
 
   return (
     <div>
