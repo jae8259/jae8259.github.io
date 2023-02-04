@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const withRoutes = require("nextjs-routes/config")();
 const nextConfig = {
   webpack: (config) => {
@@ -12,3 +13,6 @@ const nextConfig = {
 };
 
 module.exports = withRoutes(nextConfig);
+module.exports = {
+  exportPathMap: () => {},
+};

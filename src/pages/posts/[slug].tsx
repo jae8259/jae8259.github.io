@@ -6,23 +6,26 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
-export const getServerSideProps = async ({
-  params,
-}: {
-  params: PostsParams;
-}) => {
-  try {
-    const response = await axios.get<PostResponse>(
-      mapApiUrl(PATH.posts, params.slug)
-    );
-    const post = response.data;
+export const getStaticProps = async ({ params }: { params: PostsParams }) => {
+  const response = await axios.get<PostResponse>(
+    mapApiUrl(PATH.posts, params.slug)
+  );
+  const post = response.data;
 
-    return { props: { post } };
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return { redirect: { destination: PATH.posts, permanent: false } };
-    }
-  }
+  return { props: { post } };
+};
+
+export const getStaticPaths = async () => {
+  const response = await axios.get<PostResponse[]>(mapApiUrl(PATH.posts));
+  const posts = response.data;
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export default function Post({ post }: PostProps) {
