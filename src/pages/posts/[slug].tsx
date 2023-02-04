@@ -1,10 +1,10 @@
 import { PATH } from "@/shared/constants";
 import { mapApiUrl } from "@/shared/mappers";
+import { PostProps, PostResponse, PostsParams } from "@/types/posts";
 import { DarkMode } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { PostProps, PostResponse, PostsParams } from "./types";
 
 export const getServerSideProps = async ({
   params,
