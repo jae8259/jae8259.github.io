@@ -12,6 +12,7 @@ A small Jekyll + Just the Docs site for code-heavy computer science notes.
 - [Operating Systems]({{ '/docs/operating-systems/' | relative_url }})
 - [Memory Allocator]({{ '/docs/memory-allocator/' | relative_url }})
 - [Networks]({{ '/docs/networks/' | relative_url }})
+- [Memory Allocator Series]({{ '/series/memory-allocator-series/' | relative_url }})
 
 ## Writing style
 

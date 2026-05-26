@@ -12,7 +12,7 @@ Minimal GitHub Pages setup for writing CS notes in Markdown with Jekyll, Just th
 
 ## Where to put notes
 
-Put notes in the `docs/` directory.
+Put standalone notes in the `docs/` directory. Put multi-page series in `series/`.
 
 Example:
 
@@ -21,6 +21,17 @@ docs/
   operating-systems.md
   memory-allocator.md
   networks.md
+
+series/
+  memory-allocator-series/
+    index.md
+    01-overview.md
+    02-free-lists.md
+
+assets/
+  images/
+    memory-allocator-series/
+      allocator-layout.svg
 ```
 
 ## How to add a new note
@@ -29,6 +40,8 @@ docs/
 2. Add front matter at the top
 3. Write the note in normal Markdown
 4. Commit and push
+
+For a series, create a folder in `series/` with an `index.md` landing page and numbered child pages such as `01-overview.md`, `02-details.md`, and so on.
 
 Example note:
 
@@ -62,6 +75,20 @@ Recommended fields:
 
 - `title`: the page title shown in navigation
 - `nav_order`: controls sidebar order
+- `parent`: use this on series child pages to nest them under the series landing page
+- `has_children`: use this on a series landing page
+
+## How to embed images
+
+Store images under `assets/images/`, usually in a topic or series subfolder.
+
+Example:
+
+```markdown
+![Allocator layout]({{ '/assets/images/memory-allocator-series/allocator-layout.svg' | relative_url }})
+```
+
+Using `relative_url` keeps links working on both user sites and project sites.
 
 ## How to write code blocks
 
