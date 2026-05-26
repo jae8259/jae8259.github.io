@@ -1,0 +1,24 @@
+title: CS Notes
+description: Clean, code-heavy computer science notes.
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+plugins:
+  - jekyll-remote-theme
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+search_enabled: true
+heading_anchors: true
+nav_sort: case_insensitive

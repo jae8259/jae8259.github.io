@@ -1,38 +1,122 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CS Notes on GitHub Pages
 
-## Getting Started
+Minimal GitHub Pages setup for writing CS notes in Markdown with Jekyll, Just the Docs, and Rouge syntax highlighting.
 
-First, run the development server:
+## What this repo does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- Stores notes as plain Markdown files
+- Builds a static documentation-style site with Jekyll
+- Uses Just the Docs for navigation and layout
+- Uses Rouge for fenced code block syntax highlighting
+- Keeps the workflow simple: add one Markdown file, commit, push
+
+## Where to put notes
+
+Put notes in the `docs/` directory.
+
+Example:
+
+```text
+docs/
+  operating-systems.md
+  memory-allocator.md
+  networks.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to add a new note
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Create a new Markdown file in `docs/`, for example `docs/concurrency.md`
+2. Add front matter at the top
+3. Write the note in normal Markdown
+4. Commit and push
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Example note:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+````markdown
+---
+title: Concurrency
+nav_order: 5
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Concurrency
 
-## Learn More
+Notes about threads and synchronization.
 
-To learn more about Next.js, take a look at the following resources:
+```rust
+use std::thread;
+```
+````
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Required front matter
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Use this at the top of every note:
 
-## Deploy on Vercel
+```yaml
+---
+title: Your Note Title
+nav_order: 5
+---
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Recommended fields:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `title`: the page title shown in navigation
+- `nav_order`: controls sidebar order
+
+## How to write code blocks
+
+Use fenced code blocks with triple backticks and a lower-case language tag.
+
+Examples:
+
+````markdown
+```c
+printf("hello\n");
+```
+
+```python
+print("hello")
+```
+
+```bash
+ls -la
+```
+````
+
+Good language tags for this setup include:
+
+- `c`
+- `cpp`
+- `python`
+- `bash`
+- `javascript`
+- `typescript`
+- `rust`
+- `go`
+- `sql`
+- `nasm`
+- `yaml`
+- `toml`
+- `json`
+
+Rouge highlighting is most reliable when language tags are lower-case. For assembly, prefer `nasm` over generic `asm`.
+
+## GitHub Pages setup
+
+For the simplest setup:
+
+1. Push this repository to GitHub
+2. Open **Settings -> Pages**
+3. Under **Build and deployment**, set **Source** to **Deploy from a branch**
+4. Select your default branch (usually `main`) and the `/ (root)` folder
+5. Save
+
+After that, GitHub Pages will build the site automatically when you push commits.
+
+If this repository is your user site (for example `username.github.io`), it will publish at that domain. If it is a project repository, it will publish under a repository path.
+
+## Local development
+
+Local setup is optional. This repo is intended to work directly through GitHub Pages.
+
+If you already use Jekyll locally, you can preview the site before pushing. Otherwise, just commit and push your Markdown files.
